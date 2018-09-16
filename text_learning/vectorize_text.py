@@ -54,6 +54,8 @@ for vectorised_name, from_person in [(0, from_sara), (1, from_chris)]:
             parsed_email = parsed_email.replace('sara', '')
             parsed_email = parsed_email.replace('shackleton', '')
             parsed_email = parsed_email.replace('chris', '')
+            parsed_email = parsed_email.replace('sshacklensf', '')
+            parsed_email = parsed_email.replace('cgermannsf', '')
 
             # The idea of stemming is to improve IR performance generally by
             # bringing under one heading variant forms of a word which share a
