@@ -14,8 +14,6 @@ The dataset used in this example is a preprocessed excerpt of the
 
 """
 
-
-
 print __doc__
 
 from time import time
@@ -33,7 +31,6 @@ from sklearn.svm import SVC
 
 # Display progress logs on stdout
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
-
 
 ###############################################################################
 # Download the data, if not already on disk and load it as numpy arrays
@@ -58,7 +55,6 @@ print "n_samples: %d" % n_samples
 print "n_features: %d" % n_features
 print "n_classes: %d" % n_classes
 
-
 ###############################################################################
 # Split into a training and testing set
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
@@ -75,12 +71,15 @@ print "done in %0.3fs" % (time() - t0)
 
 eigenfaces = pca.components_.reshape((n_components, h, w))
 
+explained_variance = pca.explained_variance_ratio_
+print "Percentage of variance explained by the first two principal comonents:", explained_variance[0], explained_variance[1]
+print
+
 print "Projecting the input data on the eigenfaces orthonormal basis"
 t0 = time()
 X_train_pca = pca.transform(X_train)
 X_test_pca = pca.transform(X_test)
 print "done in %0.3fs" % (time() - t0)
-
 
 ###############################################################################
 # Train a SVM classification model
@@ -98,7 +97,6 @@ print "done in %0.3fs" % (time() - t0)
 print "Best estimator found by grid search:"
 print clf.best_estimator_
 
-
 ###############################################################################
 # Quantitative evaluation of the model quality on the test set
 
@@ -109,7 +107,6 @@ print "done in %0.3fs" % (time() - t0)
 
 print classification_report(y_test, y_pred, target_names=target_names)
 print confusion_matrix(y_test, y_pred, labels=range(n_classes))
-
 
 ###############################################################################
 # Qualitative evaluation of the predictions using matplotlib
@@ -124,7 +121,6 @@ def plot_gallery(images, titles, h, w, n_row=3, n_col=4):
         pl.title(titles[i], size=12)
         pl.xticks(())
         pl.yticks(())
-
 
 # plot the result of the prediction on a portion of the test set
 
